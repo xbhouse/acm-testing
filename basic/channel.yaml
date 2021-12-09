@@ -1,0 +1,24 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  annotations:
+    apps.open-cluster-management.io/reconcile-rate: medium
+  name: health-check-channel
+  namespace: git-repos
+spec:
+  pathname: 'https://gitlab.consulting.redhat.com/bhouse/acm-testing.git'
+  secretRef:
+    name: git-credential
+  type: Git
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: health-check-secrets-channel
+  namespace: canary
+spec:
+  type: Namespace
+  pathname: canary
+  sourceNamespaces:
+  - canary
