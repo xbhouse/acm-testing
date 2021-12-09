@@ -10,6 +10,9 @@ patches:
       path: /metadata/name
       value: health-check-prod-subscription
     - op: replace
+      path: /metadata/labels/app
+      value: health-check-prod
+    - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-prod-placement
 - target:
@@ -19,6 +22,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-prod-subscription
+    - op: replace
+      path: /metadata/labels/app
+      value: health-check-secrets-prod
     - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-secrets-prod-placement

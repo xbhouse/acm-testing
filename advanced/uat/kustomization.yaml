@@ -10,6 +10,9 @@ patches:
       path: /metadata/name
       value: health-check-uat-subscription
     - op: replace
+      path: /metadata/labels/app
+      value: health-check-uat
+    - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-uat-placement
 - target:
@@ -19,6 +22,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-uat-subscription
+    - op: replace
+      path: /metadata/labels/app
+      value: health-check-secrets-uat
     - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-secrets-uat-placement
