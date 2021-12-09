@@ -1,3 +1,4 @@
 resources:
 - placement.yaml
 - subscription.yaml
+- secret.yaml

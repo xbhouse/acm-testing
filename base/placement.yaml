@@ -27,5 +27,9 @@ metadata:
 spec:
   clusterSelector:
     matchExpressions:
-    - key: health_check_override
+    - key: local-cluster
       operator: DoesNotExist
+    - key: environment
+        operator: In
+        values:
+        - REPLACE BY KUSTOMIZE
