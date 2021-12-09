@@ -1,3 +1,4 @@
+---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
@@ -15,3 +16,20 @@ spec:
     placementRef:
       name: health-check-placement
       kind: PlacementRule
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: health-check-secrets-subscription
+  namespace: canary
+  labels:
+    app: health-check-secrets
+spec:
+  channel: canary/health-check-secrets-channel
+  packageFilter:
+    annotations:
+      secretname: "pull-secret"
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: health-check-secrets-placement

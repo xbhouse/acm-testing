@@ -1,3 +1,4 @@
+---
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
@@ -15,3 +16,16 @@ spec:
         operator: In
         values:
         - REPLACE BY KUSTOMIZE
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: health-check-secrets-placement
+  namespace: canary
+  annotations:
+    secretname: "pull-secret"
+spec:
+  clusterSelector:
+    matchExpressions:
+    - key: health_check_override
+      operator: DoesNotExist
