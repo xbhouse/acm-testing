@@ -40,7 +40,3 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-uat-placement
-    - op: replace
-      path: /spec/clusterSelector/matchExpressions/1/values
-      value:
-        - uat
