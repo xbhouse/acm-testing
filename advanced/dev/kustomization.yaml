@@ -10,9 +10,6 @@ patches:
       path: /metadata/name
       value: health-check-dev-subscription
     - op: replace
-      path: /metadata/labels/app
-      value: health-check-dev
-    - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-dev-placement
 - target:
@@ -22,9 +19,6 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-dev-subscription
-    - op: replace
-      path: /metadata/labels/app
-      value: health-check-secrets-dev
     - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-secrets-dev-placement
@@ -36,9 +30,8 @@ patches:
       path: /metadata/name
       value: health-check-dev-placement
     - op: replace
-      path: /spec/clusterSelector/matchExpressions/1/values
-      value:
-        - dev
+      path: /spec/clusterSelector/matchLabels/environment
+      value: dev
 - target: 
     kind: PlacementRule
     name: health-check-secrets-placement
@@ -47,7 +40,6 @@ patches:
       path: /metadata/name
       value: health-check-secrets-dev-placement
     - op: replace
-      path: /spec/clusterSelector/matchExpressions/2/values
-      value:
-        - dev
+      path: /spec/clusterSelector/matchLabels/environment
+      value: dev
 

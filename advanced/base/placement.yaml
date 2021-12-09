@@ -11,10 +11,8 @@ spec:
     matchExpressions:
     - key: health_check_override
       operator: DoesNotExist
-    - key: environment
-      operator: In
-      values:
-      - REPLACE BY KUSTOMIZE
+    matchLabels:
+      environment: REPLACE BY KUSTOMIZE
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
@@ -32,8 +30,6 @@ spec:
       operator: In
       values:
       - OpenShift
-    - key: environment
-      operator: In
-      values:
-      - REPLACE BY KUSTOMIZE
+    matchLabels:
+      environment: REPLACE BY KUSTOMIZE
 

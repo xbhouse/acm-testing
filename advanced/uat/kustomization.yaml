@@ -10,9 +10,6 @@ patches:
       path: /metadata/name
       value: health-check-uat-subscription
     - op: replace
-      path: /metadata/labels/app
-      value: health-check-uat
-    - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-uat-placement
 - target:
@@ -22,9 +19,6 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-uat-subscription
-    - op: replace
-      path: /metadata/labels/app
-      value: health-check-secrets-uat
     - op: replace
       path: /spec/placement/placementRef/name
       value: health-check-secrets-uat-placement
@@ -36,9 +30,8 @@ patches:
       path: /metadata/name
       value: health-check-uat-placement
     - op: replace
-      path: /spec/clusterSelector/matchExpressions/1/values
-      value:
-        - uat
+      path: /spec/clusterSelector/matchLabels/environment
+      value: uat
 - target: 
     kind: PlacementRule
     name: health-check-secrets-placement
@@ -47,6 +40,5 @@ patches:
       path: /metadata/name
       value: health-check-secrets-uat-placement
     - op: replace
-      path: /spec/clusterSelector/matchExpressions/2/values
-      value:
-        - uat
+      path: /spec/clusterSelector/matchLabels/environment
+      value: uat
