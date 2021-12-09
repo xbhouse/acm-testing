@@ -40,4 +40,8 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-dev-placement
+    - op: replace
+      path: /spec/clusterSelector/matchExpressions/2/values
+      value:
+        - dev
 

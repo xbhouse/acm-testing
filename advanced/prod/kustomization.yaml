@@ -40,3 +40,7 @@ patches:
     - op: replace
       path: /metadata/name
       value: health-check-secrets-prod-placement
+    - op: replace
+      path: /spec/clusterSelector/matchExpressions/2/values
+      value:
+        - prod

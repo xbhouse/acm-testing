@@ -32,4 +32,8 @@ spec:
       operator: In
       values:
       - OpenShift
+    - key: environment
+      operator: In
+      values:
+      - REPLACE BY KUSTOMIZE
 
