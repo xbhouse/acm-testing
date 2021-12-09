@@ -1,0 +1,17 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: health-check-placement
+  namespace: canary
+  annotations: {}
+  labels:
+    app: health-check
+spec:
+  clusterSelector:
+    matchExpressions:
+      - key: health_check_override
+        operator: DoesNotExist
+      - key: environment
+        operator: In
+        values:
+        - REPLACE BY KUSTOMIZE

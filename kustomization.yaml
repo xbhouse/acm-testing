@@ -1,0 +1,8 @@
+resources:
+- ./dev
+- ./prod
+- ./uat
+- ./secrets
+- channel.yaml
+- application.yaml
+    

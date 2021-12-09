@@ -1,0 +1,50 @@
+resources:
+- ../base
+- ../secrets
+
+patches:
+- target:
+    kind: Subscription
+    name: health-check-subscription
+  patch: |
+    - op: replace
+      path: /metadata/name
+      value: health-check-dev-subscription
+    - op: replace
+      path: /spec/placement/placementRef/name
+      value: health-check-dev-placement
+    - op: add
+      path: /metadata/annotations
+      value:
+        apps.open-cluster-management.io/git-branch: main
+        apps.open-cluster-management.io/git-path: secrets
+        apps.open-cluster-management.io/reconcile-option: merge
+- target:
+    kind: Subscription
+    name: health-check-secrets-subscription
+  patch: |
+    - op: replace
+      path: /metadata/name
+      value: health-check-secrets-dev-subscription
+    - op: replace
+      path: /spec/placement/placementRef/name
+      value: health-check-secrets-dev-placement
+- target: 
+    kind: PlacementRule
+    name: health-check-placement
+  patch: |
+    - op: replace
+      path: /metadata/name
+      value: health-check-dev-placement
+    - op: replace
+      path: /spec/clusterSelector/matchExpressions/1/values
+      value:
+        - dev
+- target: 
+    kind: PlacementRule
+    name: health-check-secrets-placement
+  patch: |
+    - op: replace
+      path: /metadata/name
+      value: health-check-secrets-dev-placement
+
