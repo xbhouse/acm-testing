@@ -3,6 +3,10 @@ kind: Subscription
 metadata:
   name: health-check-subscription
   namespace: canary
+  annotations:
+    apps.open-cluster-management.io/git-branch: main
+    apps.open-cluster-management.io/git-path: secrets
+    apps.open-cluster-management.io/reconcile-option: merge
   labels:
     app: health-check
 spec:
