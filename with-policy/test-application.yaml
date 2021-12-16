@@ -19,7 +19,7 @@ metadata:
   namespace: test
   annotations:
     apps.open-cluster-management.io/git-branch: main
-    apps.open-cluster-management.io/git-path: with-policy/deployables
+    apps.open-cluster-management.io/git-path: with-policy/deployables/policy
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
     app: test
