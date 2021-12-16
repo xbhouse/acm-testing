@@ -2,7 +2,11 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-secrets
-  namespace: test
+  namespace: secrets
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
 spec:
   remediationAction: inform
   disabled: false
@@ -17,7 +21,7 @@ spec:
           severity: low
           namespaceSelector:
             include:
-              - secrets
+              - test
           object-templates:
             - complianceType: musthave
               objectDefinition:
@@ -31,3 +35,31 @@ spec:
                 data:
                   username: {{ fromSecret "secrets" "pull-secret" "username" }}
                   password: {{ fromSecret "secrets" "pull-secret" "password" }}
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-secrets
+placementRef:
+  name: placement-policy-secrets
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+  - name: policy-secrets
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-secrets
+spec:
+  clusterConditions:
+    - status: 'True'
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - dev
