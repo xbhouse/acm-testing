@@ -1,0 +1,46 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: test-application
+  namespace: test
+spec:
+  componentKinds:
+    - group: apps.open-cluster-management.io
+      kind: Subscription
+  descriptor: {}
+  selector:
+    matchLabels:
+      app: test
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: test-subscription
+  namespace: test
+  annotations:
+    apps.open-cluster-management.io/git-branch: main
+    apps.open-cluster-management.io/git-path: with-policy/deployables
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: test
+    apps.open-cluster-management.io/reconcile-rate: medium
+spec:
+  channel: git-repos/test-channel
+  placement:
+    placementRef:
+      name: test-placement
+      kind: PlacementRule
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: test-placement
+  namespace: test
+  labels:
+    app: test
+spec:
+  clusterSelector:
+    matchLabels:
+      environment: dev
+      local-cluster: 'true'
+
