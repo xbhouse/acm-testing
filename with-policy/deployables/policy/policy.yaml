@@ -31,8 +31,8 @@ spec:
                   annotations:
                     app.open-cluster-management.io/deployables: "secret"
                 data:
-                  username: {{ fromSecret "secrets" "pull-secret" "username" }}
-                  password: {{ fromSecret "secrets" "pull-secret" "password" }}
+                  username: '{{ fromSecret "secrets" "pull-secret" "username" }}'
+                  password: '{{ fromSecret "secrets" "pull-secret" "password" }}'
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
