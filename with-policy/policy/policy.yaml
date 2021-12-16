@@ -2,7 +2,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-secrets
-  namespace: git-repos
+  namespace: secrets
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -40,6 +40,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-secrets
+  namespace: secrets
 placementRef:
   name: placement-policy-secrets
   kind: PlacementRule
@@ -53,6 +54,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-secrets
+  namespace: secrets
 spec:
   clusterConditions:
     - status: 'True'
