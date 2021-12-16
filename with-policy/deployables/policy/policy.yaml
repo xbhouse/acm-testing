@@ -4,7 +4,7 @@ kind: Policy
 metadata:
   name: policy-secrets
 spec:
-  remediationAction: inform
+  remediationAction: enforce
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -13,12 +13,13 @@ spec:
         metadata:
           name: policy-secrets-config
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           namespaceSelector:
             include:
-              - secrets
+              - default
               - test
+              - secrets
           object-templates:
             - complianceType: musthave
               objectDefinition:
