@@ -40,7 +40,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-secrets
-  namespace: secrets
 placementRef:
   name: placement-policy-secrets
   kind: PlacementRule
@@ -54,7 +53,6 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-secrets
-  namespace: secrets
 spec:
   clusterConditions:
     - status: 'True'
