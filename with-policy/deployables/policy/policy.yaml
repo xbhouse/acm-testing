@@ -3,7 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-secrets
-  namespace: test
+  namespace: secrets-channel
 spec:
   remediationAction: inform
   disabled: false
@@ -19,6 +19,7 @@ spec:
           namespaceSelector:
             include:
               - secrets
+              - test
           object-templates:
             - complianceType: musthave
               objectDefinition:
@@ -37,6 +38,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-secrets
+  namespace: secrets-channel
 placementRef:
   name: placement-policy-secrets
   kind: PlacementRule
@@ -50,6 +52,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-secrets
+  namespace: secrets-channel
 spec:
   clusterConditions:
     - status: 'True'
