@@ -1,0 +1,46 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: health-check-application
+  namespace: canary
+spec:
+  componentKinds:
+    - group: apps.open-cluster-management.io
+      kind: Subscription
+  descriptor: {}
+  selector:
+    matchLabels:
+      app: health-check
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: health-check-subscription
+  namespace: canary
+  annotations:
+    apps.open-cluster-management.io/git-branch: main
+    apps.open-cluster-management.io/git-path: basic
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: health-check
+    apps.open-cluster-management.io/reconcile-rate: medium
+spec:
+  channel: git-repos/health-check-channel
+  placement:
+    placementRef:
+      name: health-check-placement
+      kind: PlacementRule
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: health-check-placement
+  namespace: canary
+  labels:
+    app: health-check
+spec:
+  clusterSelector:
+    matchLabels:
+      environment: dev
+      local-cluster: 'true'
+
